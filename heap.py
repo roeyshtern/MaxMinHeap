@@ -164,7 +164,7 @@ class MaxMinHeap:
         return max_element
 
     def extract_min(self):
-        if not right(0):
+        if not self.has_right(0):
             return self.data.pop()
 
         min_element_index = 1
