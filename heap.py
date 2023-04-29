@@ -138,3 +138,27 @@ class MaxMinHeap:
                 min_index = i
         
         return min_index
+
+    def heapify_one_node(self, index):
+        current_parent_index = index
+        while parent(current_parent_index) != -1:
+            current_parent_index = parent(current_parent_index)
+            if height(current_parent_index) % 2 == 0:
+                if self.data[index] > self.data[current_parent_index]:
+                    self.swap(index, current_parent_index)
+                    self.heapify_one_node(index)
+                    index = current_parent_index
+            else:
+                if self.data[index] < self.data[current_parent_index]:
+                    self.swap(index, current_parent_index)
+                    self.heapify_one_node(index)
+                    index = current_parent_index
+    
+    def extract_max(self):
+        first_index = 0
+        last_index = self.size() - 1
+        self.swap(first_index, last_index)
+        max_element = self.data.pop()
+        self.heapify_node(first_index)
+
+        return max_element
