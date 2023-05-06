@@ -63,7 +63,10 @@ class MaxMinHeap:
         lines = [first_line, second_line] + [a + u * ' ' + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
-    def build_heap(self): 
+    def build_heap(self, filename=None): 
+        if filename is not None:
+            values = get_values_from_file(filename)
+            self.data = values
         last_not_leaf = math.floor((len(self.data) / 2) - 1)
         for i in range(last_not_leaf, -1, -1):
             self.heapify_node(i)
