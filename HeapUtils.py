@@ -51,7 +51,7 @@ def check_children_greater(heap, curr_index, value):
 
 def get_values_from_file(filename):
     with open(filename, 'r') as f:
-        data = f.read().replace(",", "")
+        data = f.read().replace(',', '')
         values = [int(x) for x in data.split()]
 
     return values

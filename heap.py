@@ -1,5 +1,6 @@
 import math
 from HeapUtils import *
+import random
 
 class MaxMinHeap:
     def __init__(self, data=None):
@@ -21,6 +22,10 @@ class MaxMinHeap:
         self.data[i], self.data[j] = self.data[j], self.data[i]
 
     def print_heap(self):
+        if self.size() == 0:
+            print('Heap is empty. Use Build heap or Insert')
+            return
+
         lines, *_ = self.display(0)
         for line in lines:
             print(line)
@@ -29,7 +34,7 @@ class MaxMinHeap:
         return len(self.data)
 
     def display(self, i):
-        """Returns list of strings, width, height, and horizontal coordinate of the root."""
+        '''Returns list of strings, width, height, and horizontal coordinate of the root.'''
         # No child.
         if  left(i) >= self.size() and right(i) >= self.size():
             line = '%s' % self.data[i]
@@ -142,22 +147,25 @@ class MaxMinHeap:
         
         return min_index
 
-    def heapify_one_node(self, index):
+    def push_up(self, index):
         current_parent_index = index
         while parent(current_parent_index) != -1:
             current_parent_index = parent(current_parent_index)
             if height(current_parent_index) % 2 == 0:
                 if self.data[index] > self.data[current_parent_index]:
                     self.swap(index, current_parent_index)
-                    self.heapify_one_node(index)
+                    self.push_up(index)
                     index = current_parent_index
             else:
                 if self.data[index] < self.data[current_parent_index]:
                     self.swap(index, current_parent_index)
-                    self.heapify_one_node(index)
+                    self.push_up(index)
                     index = current_parent_index
     
     def extract_max(self):
+        if self.size() == 0:
+            raise ValueError('Heap is empty')
+
         max_element_index = 0
         last_index = self.size() - 1
         self.swap(max_element_index, last_index)
@@ -167,6 +175,9 @@ class MaxMinHeap:
         return max_element
 
     def extract_min(self):
+        if self.size() == 0:
+            raise ValueError('Heap is empty')
+
         if not self.has_right(0):
             return self.data.pop()
 
@@ -182,11 +193,43 @@ class MaxMinHeap:
         return min_element
 
     def delete(self, index):
+        if index < 0 or index >= self.size():
+            raise ValueError('Heap is empty. Use Build heap or Insert')
+
         last_index = self.size() - 1
         self.swap(index, last_index)
         self.data.pop()
+        if index == last_index:
+            return
+
+        self.push_up(index)
         self.heapify_node(index)
 
     def insert(self, key):
         self.data.append(key)
-        self.heapify_one_node(len(self.data) - 1)
+        self.push_up(len(self.data) - 1)
+
+    def print_sort(self):
+        if self.size() == 0:
+            raise ValueError('Heap is empty')
+
+        while self.size() > 0:
+            print(self.extract_max(), end=' ')
+        print()
+
+    def do_random_op(self):
+        chosen_op_index = random.randint(0, 3)
+        rand_int = 0
+
+        if chosen_op_index == 0:
+            rand_int = random.randint(-100, 333)
+            self.insert(rand_int )
+        elif chosen_op_index == 1:
+            rand_int  = random.randint(0, self.size() - 1)
+            self.delete(rand_int)
+        elif chosen_op_index == 2:
+            self.extract_min()
+        elif chosen_op_index == 3:
+            self.extract_max()
+
+        
