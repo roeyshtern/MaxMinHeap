@@ -9,24 +9,23 @@ def build_heap(heap):
         raise ValueError()
     heap.build_heap(filename)
 
-def heapify(heap):
-    index = int(input("Enter index to heapify: "))
-    if index < 0 or index >= heap.size():
-        print("Invalid index. Please try again.\n")
-        raise ValueError()
+def sort_heap(heap):
+    if heap.size() == 0:
+        print("Heap is empty. Use Build heap or Insert")
     else:
-        heap.heapify_node(index)
+        #TODO: change it to sort
+        heap.print_heap()
 
 def extract_max(heap):
     if heap.size() == 0:
-        print("Heap is empty.")
+        print("Heap is empty. Use Build heap or Insert")
     else:
         max_value = heap.extract_max()
         print(f"Max value extracted: {max_value}")
 
 def extract_min(heap):
     if heap.size() == 0:
-        print("Heap is empty.")
+        print("Heap is empty. Use Build heap or Insert")
     else:
         min_value = heap.extract_min()
         print(f"Min value extracted: {min_value}")
@@ -45,20 +44,16 @@ def delete_index(heap):
 def print_heap(heap):
     heap.print_heap()
 
-def print_main_menu():
-    print("Main menu:")
-    print("1. Build heap")
-    print("0. Exit")
-
 def print_heap_menu():
     print("Heap menu:")
-    print("1. Heapify")
-    print("2. Extract max")
-    print("3. Extract min")
-    print("4. Insert value")
-    print("5. Delete index")
-    print("6. Print heap")
-    print("7. Back to main menu")
+    print("1. Build heap")
+    print("2. Sort heap")
+    print("3. Extract max")
+    print("4. Extract min")
+    print("5. Insert value")
+    print("6. Delete index")
+    print("7. Print heap")
+    print("8. Back to main menu")
     print("0. Exit")
 
 def start():
@@ -66,42 +61,30 @@ def start():
     heap = MaxMinHeap()
 
     while True:
-        print_main_menu()
+        print_heap_menu()
         choice = int(input("Enter your choice: "))
+        
         if choice == 0:
             print("Thank you for using our program.")
-            break
+            return
         elif choice == 1:
             try:
                 build_heap(heap)
             except ValueError:
                 continue
-            while True:
-                print_heap_menu()
-                choice = int(input("Enter your choice: "))
-                if choice == 0:
-                    return
-                elif choice == 1:
-                    try:
-                        heapify(heap)
-                    except ValueError:
-                        continue
-                elif choice == 2:
-                    extract_max(heap)
-                elif choice == 3:
-                    extract_min(heap)
-                elif choice == 4:
-                    insert_value(heap)
-                elif choice == 5:
-                    try:
-                        delete_index(heap)
-                    except ValueError:
-                        continue
-                elif choice == 6:
-                    print_heap(heap)
-                elif choice == 7:
-                    break
-                else:
-                    print("Invalid choice. Please try again.")
+        elif choice == 2:
+            sort_heap(heap)
+        elif choice == 3:
+            extract_max(heap)
+        elif choice == 4:
+            extract_min(heap)
+        elif choice == 5:
+            insert_value(heap)
+        elif choice == 6:
+            delete_index(heap)
+        elif choice == 7:
+            print_heap(heap)
+        elif choice == 8:
+            break
         else:
             print("Invalid choice. Please try again.")
