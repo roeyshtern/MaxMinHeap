@@ -1,11 +1,14 @@
+import random
+
 from heap import MaxMinHeap
 from HeapUtils import *
 from menu import start
-import random
+
 
 def main():
     test_randoms()
     start()
+
 
 def test_randoms():
     for i in range(1000):
@@ -14,15 +17,7 @@ def test_randoms():
         num_of_ops = random.randint(1, 3000)
         for _ in range(num_of_ops):
             heap.do_random_op()
-            assert check_if_heap_is_good(heap) 
-
-def generate_random_list():
-    list_size = random.randint(0, 40)
-    ret_list = []
-    for _ in range(list_size):
-        ret_list.append(random.randint(-20, 100))
-
-    return ret_list
+            assert check_if_heap_is_good(heap)
 
 
 if __name__ == '__main__':

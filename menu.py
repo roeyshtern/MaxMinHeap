@@ -1,6 +1,6 @@
-
 import os
 from heap import MaxMinHeap
+
 
 def build_heap(heap):
     filename = input('Enter filename: ')
@@ -9,27 +9,34 @@ def build_heap(heap):
 
     heap.build_heap(filename)
 
+
 def sort_heap(heap):
     heap.print_sort()
+
 
 def extract_max(heap):
     max_value = heap.extract_max()
     print(f'Max value extracted: {max_value}')
 
+
 def extract_min(heap):
     min_value = heap.extract_min()
     print(f'Min value extracted: {min_value}')
+
 
 def insert_value(heap):
     value = int(input('Enter value to insert: '))
     heap.insert(value)
 
+
 def delete_index(heap):
     index = int(input('Enter index to delete: '))
     heap.delete(index)
 
+
 def print_heap(heap):
     heap.print_heap()
+
 
 def print_heap_menu():
     print('Heap menu:')
@@ -43,6 +50,7 @@ def print_heap_menu():
     print('8. Back to main menu')
     print('0. Exit')
 
+
 def start():
     # Create a new Heap object
     heap = MaxMinHeap()
@@ -51,7 +59,7 @@ def start():
         try:
             print_heap_menu()
             choice = int(input('Enter your choice: '))
-            
+
             if choice == 0:
                 print('Thank you for using our program.')
                 return
@@ -73,6 +81,6 @@ def start():
                 break
             else:
                 print('Invalid choice. Please try again.')
-        
+
         except ValueError as e:
             print(e)
