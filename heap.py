@@ -154,12 +154,10 @@ class MaxMinHeap:
             if height(current_parent_index) % 2 == 0:
                 if self.data[index] > self.data[current_parent_index]:
                     self.swap(index, current_parent_index)
-                    self.push_up(index)
                     index = current_parent_index
             else:
                 if self.data[index] < self.data[current_parent_index]:
                     self.swap(index, current_parent_index)
-                    self.push_up(index)
                     index = current_parent_index
     
     def extract_max(self):
@@ -217,6 +215,7 @@ class MaxMinHeap:
             print(self.extract_max(), end=' ')
         print()
 
+    # For tests
     def do_random_op(self):
         chosen_op_index = random.randint(0, 3)
         rand_int = 0
@@ -225,11 +224,20 @@ class MaxMinHeap:
             rand_int = random.randint(-100, 333)
             self.insert(rand_int )
         elif chosen_op_index == 1:
+            if self.size() == 0:
+                return
+
             rand_int  = random.randint(0, self.size() - 1)
             self.delete(rand_int)
         elif chosen_op_index == 2:
+            if self.size() == 0:
+                return
+
             self.extract_min()
         elif chosen_op_index == 3:
+            if self.size() == 0:
+                return
+
             self.extract_max()
 
         

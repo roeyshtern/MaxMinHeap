@@ -76,5 +76,3 @@ def start():
         
         except ValueError as e:
             print(e)
-
-        

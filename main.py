@@ -1,14 +1,15 @@
 from heap import MaxMinHeap
-from HeapUtils import check_if_heap_is_good
+from HeapUtils import *
 from menu import start
 import random
 
 def main():
+    test_randoms()
     start()
 
 def test_randoms():
-    for _ in range(10000):
-        heap = MaxMinHeap(generate_random_list())
+    for i in range(1000):
+        heap = MaxMinHeap(get_values_from_file(f'tests/test_{i}'))
         heap.build_heap()
         num_of_ops = random.randint(1, 3000)
         for _ in range(num_of_ops):
