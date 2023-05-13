@@ -79,11 +79,8 @@ class MaxMinHeap:
             [a + u * ' ' + b for a, b in zipped_lines]
         return lines, n + m + u, max(p, q) + 2, n + u // 2
 
-    def build_heap(self, filename=None):
+    def build_heap(self):
         """This function builds a max-min-heap."""
-        if filename is not None:
-            values = get_values_from_file(filename)
-            self.data = values
         last_not_leaf = math.floor((len(self.data) / 2) - 1)
         for i in range(last_not_leaf, -1, -1):
             self.heapify_node(i)
@@ -198,7 +195,6 @@ class MaxMinHeap:
         """This function removes and returns the smallest element from the heap"""
         if self.size() == 0:
             raise ValueError('Heap is empty')
-
         if not self.has_right(0):
             return self.data.pop()
 
