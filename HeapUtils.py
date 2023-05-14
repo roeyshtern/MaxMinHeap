@@ -1,4 +1,5 @@
 import math
+import os
 
 
 def parent(i):
@@ -58,6 +59,10 @@ def check_children_greater(heap, curr_index, value):
     else:
         return heap.data[curr_index] >= value
 
+def fill_heap_data_from_file(heap, filename):
+    if not os.path.exists(filename):
+        raise ValueError('The file does not exist. Please check the file path and try again.')
+    heap.data = get_values_from_file(filename)
 
 def get_values_from_file(filename):
     with open(filename, 'r') as f:

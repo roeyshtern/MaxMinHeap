@@ -181,7 +181,7 @@ class MaxMinHeap:
     def extract_max(self):
         """This function removes and returns the largest element from the heap"""
         if self.size() == 0:
-            raise ValueError('Heap is empty')
+            raise ValueError('Heap is empty. Use Build heap or Insert')
 
         max_element_index = 0
         last_index = self.size() - 1
@@ -194,7 +194,7 @@ class MaxMinHeap:
     def extract_min(self):
         """This function removes and returns the smallest element from the heap"""
         if self.size() == 0:
-            raise ValueError('Heap is empty')
+            raise ValueError('Heap is empty. Use Build heap or Insert')
         if not self.has_right(0):
             return self.data.pop()
 
@@ -212,7 +212,7 @@ class MaxMinHeap:
     def delete(self, index):
         """This function takes an index as input and deletes the node at that index from the heap data."""
         if index < 0 or index >= self.size():
-            raise ValueError('Heap is empty. Use Build heap or Insert')
+            raise ValueError('Invalid index. Please enter a value between 0 and the heap\'s length.')
 
         last_index = self.size() - 1
         self.swap(index, last_index)
@@ -231,7 +231,7 @@ class MaxMinHeap:
     def print_sort(self):
         """This function sorts and prints the elements in the heap"""
         if self.size() == 0:
-            raise ValueError('Heap is empty')
+            raise ValueError('Heap is empty. Use Build heap or Insert')
 
         while self.size() > 0:
             print(self.extract_max(), end=' ')

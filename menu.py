@@ -1,13 +1,12 @@
 import os
+import sys
 from heap import MaxMinHeap
-
+from HeapUtils import get_values_from_file, fill_heap_data_from_file
 
 def build_heap(heap):
     filename = input('Enter filename: ')
-    if not os.path.exists(filename):
-        raise ValueError('The file does not exist.')
-
-    heap.build_heap(filename)
+    fill_heap_data_from_file(heap, filename)    
+    heap.build_heap()
 
 
 def sort_heap(heap):
@@ -54,7 +53,16 @@ def print_heap_menu():
 def start():
     # Create a new Heap object
     heap = MaxMinHeap()
-
+    print(sys.argv)
+    if len(sys.argv) == 2:
+        filename = sys.argv[1]
+        try:
+            fill_heap_data_from_file(heap, filename)
+        except ValueError as e:
+            print(e)
+            return
+        heap.build_heap()
+    # Do something with the second argument.
     while True:
         try:
             print_heap_menu()
