@@ -6,8 +6,8 @@ from menu import start
 
 
 def main():
-    test_randoms()
-    start()
+    #test_randoms()
+    star    t()
 
 
 def test_randoms():
